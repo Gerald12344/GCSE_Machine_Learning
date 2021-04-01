@@ -149,6 +149,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_form_module_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_styles_form_module_css__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _components_slider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/slider */ "./components/slider.js");
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+// (c) Harvey Randall - 2020-2021 
+// GCSE exam algorithm for EPQ
 
 
 
@@ -180,18 +182,22 @@ function HomePage() {
   let {
     0: four,
     1: setFour
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("loading");
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    setOne(Math.floor(Math.random() * 9));
-    setTwo(Math.floor(Math.random() * 9));
-    setThree(Math.floor(Math.random() * 9));
-    setFour(Math.floor(Math.random() * 9));
-  }, []); //Return Hook
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("loading"); //Return Hook
 
   let {
     0: result,
     1: setResult
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(undefined);
+  let {
+    0: update,
+    1: forceUpdate
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    setOne(Math.floor(Math.random() * 9));
+    setTwo(Math.floor(Math.random() * 9));
+    setThree(Math.floor(Math.random() * 9));
+    setFour(Math.floor(Math.random() * 9));
+  }, [update]);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     (async () => {
       try {
@@ -205,20 +211,14 @@ function HomePage() {
 
   let sendToServer = async e => {
     e.preventDefault();
-    setResult("LOADING...");
-    let data = await axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(window.origin + '/api/inputTest', {
-      LastMockresult,
-      TargetGrade,
-      PredictedGrade,
-      AttitudeToLearing
+    forceUpdate(update + 1);
+    let data = axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(window.origin + '/api/addtoDataTraining', {
+      LastMockresult: one,
+      TargetGrade: two,
+      PredictedGrade: three,
+      AttitudeToLearing: four,
+      PredictedGrade
     });
-    console.log({
-      LastMockresult,
-      TargetGrade,
-      PredictedGrade,
-      AttitudeToLearing
-    });
-    setResult(Math.floor(data.data.AchievedGrade * 9));
   };
 
   return __jsx("div", {
@@ -234,7 +234,7 @@ function HomePage() {
   }), __jsx("button", {
     onClick: sendToServer,
     className: _styles_form_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.button
-  }, "Send to Server")));
+  }, "Send to Server")), __jsx("p", null, " You have entererd ", update, " data entries"));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (HomePage);

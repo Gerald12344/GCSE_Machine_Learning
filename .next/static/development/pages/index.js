@@ -20153,6 +20153,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_lab_Alert__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/lab/Alert */ "./node_modules/@material-ui/lab/esm/Alert/index.js");
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+// (c) Harvey Randall - 2020-2021 
+// GCSE exam algorithm for EPQ
 
 
 

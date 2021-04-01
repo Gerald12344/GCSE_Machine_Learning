@@ -1,3 +1,6 @@
+// (c) Harvey Randall - 2020-2021 
+// GCSE exam algorithm for EPQ
+
 import React, { useState, useEffect, } from 'react';
 import axios from 'axios'
 import Slider from '@material-ui/core/Slider';
@@ -14,15 +17,17 @@ function HomePage() {
   let [three, setThree] = useState("loading")
   let [four, setFour] = useState("loading")
 
+  //Return Hook
+  let [result, setResult] = useState(undefined)
+  let [update, forceUpdate] = useState(0)
+
   useEffect(() => {
     setOne(Math.floor(Math.random() * 9))
     setTwo(Math.floor(Math.random() * 9))
     setThree(Math.floor(Math.random() * 9))
     setFour(Math.floor(Math.random() * 9))
-  },[])
+  },[update])
 
-  //Return Hook
-  let [result, setResult] = useState(undefined)
 
   useEffect(() => {
     (async () => {
@@ -33,14 +38,12 @@ function HomePage() {
         setTestHook(e)
       }
     })();
-  }, [])
+  },[])
 
   let sendToServer = async (e) => {
     e.preventDefault();
-    setResult("LOADING...")
-    let data = await axios.post(window.origin + '/api/inputTest', {LastMockresult, TargetGrade, PredictedGrade, AttitudeToLearing})
-    console.log({LastMockresult, TargetGrade, PredictedGrade, AttitudeToLearing})
-    setResult(Math.floor(data.data.AchievedGrade*9))
+    forceUpdate(update + 1)
+    let data = axios.post(window.origin + '/api/addtoDataTraining', {LastMockresult:one, TargetGrade:two, PredictedGrade:three, AttitudeToLearing:four, PredictedGrade})
   }
   return(
     <div className={styles.main +' '+ styles.center}>
@@ -56,6 +59,7 @@ function HomePage() {
         <Sliders max={9} title="Acheived Grade" onChange={(e, val) => setPredictedGrade(val/9)} />
         <button onClick={sendToServer} className={styles.button}>Send to Server</button>
       </div>
+      <p> You have entererd {update} data entries</p>
     </div>
   )
 }

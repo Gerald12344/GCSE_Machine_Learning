@@ -1,3 +1,6 @@
+// (c) Harvey Randall - 2020-2021 
+// GCSE exam algorithm for EPQ
+
 import React, { useState, useEffect, } from 'react';
 import axios from 'axios'
 import Slider from '@material-ui/core/Slider';
