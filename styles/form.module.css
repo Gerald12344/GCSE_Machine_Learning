@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+.Form{
+  color:gray;
+  width:80vw;
+  margin: auto;
+}
+.bar{
+  width:80%;
+  margin: auto;
+}
+.button{
+  text-align: center;
+  text-emphasis: none;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 15px 40px 15px 40px;
+  outline: none;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  background-color: #2ecc71;
+  color:white;
+  border:none;
+  border-radius: 5px;
+}
+.button:hover{
+  background-color: #27ae60;
+}
+
+.main{
+  font-family: 'Roboto', sans-serif;
+}
+.center{
+  text-align: center !important;
+}
+
+.ResultBox{
+  text-align: center
+}
