@@ -11,7 +11,7 @@ const next = require('next')
 const ML = require("./server/ml.js")
 
 //Project setings
-const port = parseInt(process.env.PORT, 10) || 3000 //Port to server on
+const port = process.env.PORT || 3000 //Port to server on
 const dev = false //process.env.NODE_ENV !== 'production' //Production true/false
 const app = next({ dev }) // NextJS start server
 const handle = app.getRequestHandler() //get access to the web request
