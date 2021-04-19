@@ -42,7 +42,7 @@ app.prepare().then(() => {
 
 
   //Tell the server which port to listen to
-  server.listen(port, (err) => {
+  server.listen(process.env.PORT || 5000, (err) => {
     if (err) throw err //Catch errors
     console.log(`> Ready on http://localhost:${port}`) // TODO: Use Async logger
   })
